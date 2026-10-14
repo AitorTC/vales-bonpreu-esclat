@@ -1,0 +1,6 @@
+{
+  "name": "Vales Bonpreu Esclat",
+  "description": "Monedero móvil de vales de descuento de Bonpreu y Esclat con alertas de caducidad, códigos de barras para caja y escáner inteligente.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

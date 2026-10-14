@@ -1,0 +1,68 @@
+{
+  "entities": {
+    "Household": {
+      "title": "Household",
+      "description": "A family or shopping household group that shares discounts",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "passcode": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "name"]
+    },
+    "Coupon": {
+      "title": "Coupon",
+      "description": "A Bonpreu Esclat discount voucher",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "discountType": { "type": "string", "enum": ["fixed", "percentage", "promo"] },
+        "discountAmount": { "type": "number" },
+        "minPurchase": { "type": "number" },
+        "section": { "type": "string" },
+        "expiryDate": { "type": "string" },
+        "validFrom": { "type": "string" },
+        "barcode": { "type": "string" },
+        "notes": { "type": "string" },
+        "isUsed": { "type": "boolean" },
+        "usedAt": { "type": "string" },
+        "usedBy": { "type": "string" },
+        "householdId": { "type": "string" },
+        "createdBy": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "title", "discountType", "discountAmount", "expiryDate", "householdId"]
+    },
+    "Activity": {
+      "title": "Activity",
+      "description": "Activity log item for shared coupons",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "type": "string", "enum": ["add", "use", "edit", "delete"] },
+        "couponTitle": { "type": "string" },
+        "userName": { "type": "string" },
+        "details": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "type", "couponTitle", "userName", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/households/{householdId}": {
+      "schema": "Household",
+      "description": "Household group sharing coupons"
+    },
+    "/households/{householdId}/coupons/{couponId}": {
+      "schema": "Coupon",
+      "description": "Coupons belonging to a household"
+    },
+    "/households/{householdId}/activity/{activityId}": {
+      "schema": "Activity",
+      "description": "Activity feed for family members"
+    }
+  }
+}

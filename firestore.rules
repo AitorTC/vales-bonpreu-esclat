@@ -1,0 +1,17 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Households and family discount groups for Aitor & Xènia
+    match /households/{householdId} {
+      allow read, write: if true;
+
+      match /coupons/{couponId} {
+        allow read, write: if true;
+      }
+
+      match /activity/{activityId} {
+        allow read, write: if true;
+      }
+    }
+  }
+}
